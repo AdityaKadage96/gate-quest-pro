@@ -1,0 +1,66 @@
+
+
+
+# ==========================================
+# Frontend - React / Vite
+# ==========================================
+
+frontend/node_modules/
+frontend/dist/
+
+# Root-level generated frontend folders
+node_modules/
+dist/
+
+# ==========================================
+# Environment / Secrets
+# ==========================================
+
+.env
+.env.*
+*.env
+
+frontend/.env
+frontend/.env.*
+backend/.env
+backend/.env.*
+
+# Allow safe example environment files
+!.env.example
+!frontend/.env.example
+!backend/.env.example
+
+# ==========================================
+# Backend - Spring Boot / Maven
+# ==========================================
+
+backend/target/
+
+# ==========================================
+# IDE files
+# ==========================================
+
+.idea/
+*.iml
+.vscode/
+
+# ==========================================
+# OS files
+# ==========================================
+
+.DS_Store
+Thumbs.db
+
+# ==========================================
+# Logs
+# ==========================================
+
+*.log
+
+# ==========================================
+# Temporary files
+# ==========================================
+
+*.tmp
+*.temp
+
