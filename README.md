@@ -1,4 +1,3 @@
-
 # 🎯 GATE QUEST PRO
 
 ### GATE Preparation & Study Tracking Platform
@@ -13,7 +12,7 @@ The application uses a React + Vite frontend and communicates with a Spring Boot
 
 ## 🌐 Live Application
 
-🔗 **Live Website:**  
+**Live Website:**  
 https://gatequestpro.duckdns.org
 
 ---
@@ -223,13 +222,13 @@ Analytics include:
 | Let's Encrypt | SSL/TLS Certificate |
 | Certbot | SSL Certificate Management |
 | DuckDNS | Domain |
-| Linux Ubuntu | Server Operating System |
+| Ubuntu Linux | Server Operating System |
 
 ---
 
 # 🏗️ System Architecture
 
-
+```text
                          Internet
                             │
                             ▼
@@ -256,14 +255,15 @@ Analytics include:
                                     ▼
                              AWS RDS
                             PostgreSQL
+```
 
+---
 
-
-
-🔐 Authentication Architecture
+# 🔐 Authentication Architecture
 
 The application uses JWT-based authentication.
 
+```text
                          User
                            │
                            ▼
@@ -286,35 +286,49 @@ The application uses JWT-based authentication.
                            │
                            ▼
                     Protected APIs
-🔒 Security
+```
+
+---
+
+# 🔒 Security
 
 Security was considered throughout the application and deployment.
 
-Application Security
-JWT authentication
-Protected API endpoints
-Stateless authentication
-User ownership validation
-User data isolation
-Restricted CORS
-Environment-based configuration
-Passwords and secrets excluded from source code
-AWS Security
+## Application Security
+
+- JWT authentication
+- Protected API endpoints
+- Stateless authentication
+- User ownership validation
+- User data isolation
+- Restricted CORS
+- Environment-based configuration
+- Passwords and secrets excluded from source code
+
+## AWS Security
 
 The EC2 Security Group exposes only the required public services.
 
+```text
 SSH      → Port 22
 HTTP     → Port 80
 HTTPS    → Port 443
+```
 
 The following services are not publicly exposed:
 
+```text
 Spring Boot → Port 8080
 PostgreSQL  → Port 5432
+```
 
 The Spring Boot application is accessed through Nginx.
 
-🌐 Production Request Flow
+---
+
+# 🌐 Production Request Flow
+
+```text
 Browser
    │
    │ HTTPS
@@ -327,126 +341,196 @@ Nginx
                          │
                          ▼
                     PostgreSQL RDS
-⚙️ Environment Configuration
-Frontend
+```
+
+---
+
+# ⚙️ Environment Configuration
+
+## Frontend
 
 For local development, create:
 
+```text
 .env
+```
 
 Example:
 
+```env
 VITE_API_BASE_URL=http://localhost:8080/api
+```
 
 For production:
 
+```env
 VITE_API_BASE_URL=/api
+```
 
-The production frontend uses /api so requests are routed through Nginx.
+The production frontend uses `/api` so requests are routed through Nginx.
 
-Backend
+---
+
+## Backend
 
 The backend uses environment variables for sensitive configuration.
 
 Example variable names:
 
+```text
 DB_URL
 DB_USERNAME
 DB_PASSWORD
 JWT_SECRET
 JWT_EXPIRATION
+```
 
 Actual production values are stored securely on the server and are not included in this repository.
 
-⚠️ Never commit database passwords, JWT secrets, private keys, .pem files, or other credentials to GitHub.
+> ⚠️ Never commit database passwords, JWT secrets, private keys, `.pem` files, or other credentials to GitHub.
 
-💻 Local Development
-Prerequisites
+---
+
+# 💻 Local Development
+
+## Prerequisites
 
 Make sure the following are installed:
 
-Node.js
-npm
-Java 17
-Maven
-PostgreSQL
-🚀 Frontend Setup
-1. Clone the repository
+- Node.js
+- npm
+- Java 17
+- Maven
+- PostgreSQL
+
+---
+
+# 🚀 Frontend Setup
+
+### 1. Clone the repository
+
+```bash
 git clone <YOUR-FRONTEND-GITHUB-REPOSITORY>
-2. Enter the project directory
+```
+
+### 2. Enter the project directory
+
+```bash
 cd gate-quest-pro
-3. Install dependencies
+```
+
+### 3. Install dependencies
+
+```bash
 npm install
-4. Create environment file
+```
+
+### 4. Create environment file
 
 Create:
 
+```text
 .env
+```
 
 Add:
 
+```env
 VITE_API_BASE_URL=http://localhost:8080/api
-5. Start development server
+```
+
+### 5. Start development server
+
+```bash
 npm run dev
+```
 
 The frontend normally runs at:
 
+```text
 http://localhost:5173
-🏭 Production Build
+```
+
+---
+
+# 🏭 Production Build
 
 Create a production build:
 
+```bash
 npm run build
+```
 
 The production files are generated in:
 
+```text
 dist/
+```
 
 To preview the production build locally:
 
+```bash
 npm run preview
-🧪 Testing
+```
+
+---
+
+# 🧪 Testing
 
 The application was tested across multiple areas.
 
-Authentication
-Registration
-Login
-Logout
-JWT authorization
-Protected routes
-Application Features
-Dashboard
-Syllabus
-Revision
-Flashcards
-Mistakes
-Planner
-Study Logs
-Mock Tests
-Focus Room
-Analytics
-Security
-User data isolation
-Ownership validation
-Unauthorized API access
-JWT validation
-Protected backend endpoints
-Database
-CRUD operations
-Data persistence
-User-specific records
-PostgreSQL integration
-Production
-Frontend deployment
-Backend deployment
-Nginx reverse proxy
-HTTPS
-CORS
-RDS connectivity
-Production authentication
-Database persistence
-📂 Frontend Project Structure
+## Authentication
+
+- Registration
+- Login
+- Logout
+- JWT authorization
+- Protected routes
+
+## Application Features
+
+- Dashboard
+- Syllabus
+- Revision
+- Flashcards
+- Mistakes
+- Planner
+- Study Logs
+- Mock Tests
+- Focus Room
+- Analytics
+
+## Security
+
+- User data isolation
+- Ownership validation
+- Unauthorized API access
+- JWT validation
+- Protected backend endpoints
+
+## Database
+
+- CRUD operations
+- Data persistence
+- User-specific records
+- PostgreSQL integration
+
+## Production
+
+- Frontend deployment
+- Backend deployment
+- Nginx reverse proxy
+- HTTPS
+- CORS
+- RDS connectivity
+- Production authentication
+- Database persistence
+
+---
+
+# 📂 Frontend Project Structure
+
+```text
 gate-quest-pro/
 │
 ├── public/
@@ -478,18 +562,23 @@ gate-quest-pro/
 ├── package.json
 ├── vite.config.js
 └── README.md
-☁️ AWS Deployment
+```
+
+---
+
+# ☁️ AWS Deployment
 
 The production application is deployed using AWS EC2 and AWS RDS.
 
-EC2
+## EC2
 
 The EC2 instance hosts:
 
-Nginx
-React production build
-Spring Boot backend
-RDS
+- Nginx
+- React production build
+- Spring Boot backend
+
+## RDS
 
 PostgreSQL is hosted using AWS RDS.
 
@@ -497,41 +586,57 @@ The database is not publicly exposed.
 
 The EC2 instance communicates with the RDS database through the AWS network.
 
-🌐 Nginx
+---
 
-Nginx performs two main jobs:
+# 🌐 Nginx
 
-1. Serve React
+Nginx performs two main jobs.
+
+## 1. Serve React
+
+```text
 /
+```
 
 serves the React production build.
 
-2. Reverse Proxy API Requests
+## 2. Reverse Proxy API Requests
+
+```text
 /api/*
+```
 
 is forwarded to:
 
+```text
 Spring Boot :8080
+```
 
 This allows the frontend and backend to operate under the same production domain.
 
-🔒 HTTPS
+---
+
+# 🔒 HTTPS
 
 HTTPS is configured using:
 
-Let's Encrypt
-Certbot
-Nginx
+- Let's Encrypt
+- Certbot
+- Nginx
 
 Production URL:
 
+```text
 https://gatequestpro.duckdns.org
+```
 
 HTTP requests are redirected to HTTPS.
 
 Certificate renewal has also been tested using Certbot's dry-run process.
 
-🔄 Backend Service Management
+---
+
+# 🔄 Backend Service Management
 
 The Spring Boot backend runs as a Linux systemd service.
 
@@ -539,6 +644,7 @@ The service is configured to restart automatically if the application unexpected
 
 Conceptually:
 
+```text
 Spring Boot stops
        │
        ▼
@@ -546,20 +652,29 @@ systemd detects failure
        │
        ▼
 Automatic restart
-💾 Server Memory Configuration
+```
+
+---
+
+# 💾 Server Memory Configuration
 
 The production EC2 instance uses swap space to provide additional virtual memory capacity.
 
 Configured swap:
 
+```text
 2 GB
+```
 
 Swap is configured to persist across server reboots.
 
-🔁 Deployment Flow
+---
+
+# 🔁 Deployment Flow
 
 The production deployment process follows this general flow:
 
+```text
 Developer
    │
    ▼
@@ -591,27 +706,36 @@ systemd
    │
    ▼
 Spring Boot
-📦 Backend API
+```
+
+---
+
+# 📦 Backend API
 
 The frontend communicates with the Spring Boot backend through REST APIs.
 
 The production API base path is:
 
+```text
 /api
+```
 
 Authentication endpoints include:
 
+```text
 POST /api/auth/register
 POST /api/auth/login
+```
 
 Other application APIs require JWT authentication.
 
-👤 User Data Isolation
+---
+
+# 👤 User Data Isolation
 
 GATE QUEST PRO implements user-specific data access.
 
-Conceptually:
-
+```text
 User A
   │
   ├── Syllabus
@@ -628,95 +752,110 @@ User B
   ├── Mistakes
   ├── Planner
   └── Mock Tests
+```
 
 User A cannot access User B's protected application data.
 
 Ownership validation is enforced at the backend level.
 
-📱 Responsive Design
+---
+
+# 📱 Responsive Design
 
 The frontend is designed to provide a responsive experience across:
 
-Desktop
-Laptop
-Tablet
-Mobile
-🎯 Project Goals
+- Desktop
+- Laptop
+- Tablet
+- Mobile
+
+---
+
+# 🎯 Project Goals
 
 The primary goals of GATE QUEST PRO are:
 
-Centralize GATE preparation activities
-Track preparation progress
-Improve revision management
-Encourage consistent study habits
-Provide useful preparation analytics
-Maintain secure user-specific data
-Provide a scalable full-stack architecture
-🚀 Future Improvements
+- Centralize GATE preparation activities
+- Track preparation progress
+- Improve revision management
+- Encourage consistent study habits
+- Provide useful preparation analytics
+- Maintain secure user-specific data
+- Provide a scalable full-stack architecture
+
+---
+
+# 🚀 Future Improvements
 
 Potential future enhancements include:
 
-AI-powered doubt assistance
-AI-generated quizzes
-AI lecture summarization
-Personalized learning recommendations
-AI-powered study planning
-Advanced performance analytics
-Notifications and reminders
-More detailed mock-test analysis
-Social/community learning features
-Mobile application
-📸 Screenshots
+- AI-powered doubt assistance
+- AI-generated quizzes
+- AI lecture summarization
+- Personalized learning recommendations
+- AI-powered study planning
+- Advanced performance analytics
+- Notifications and reminders
+- More detailed mock-test analysis
+- Social/community learning features
+- Mobile application
+
+---
+
+# 📸 Screenshots
 
 Screenshots of the application can be added here.
 
-Example:
+Suggested screenshots:
 
-Dashboard
-Syllabus
-Revision
-Flashcards
-Mock Tests
-Analytics
-📚 Learning Outcomes
+- Login Page
+- Register Page
+- Dashboard
+- Syllabus
+- Revision
+- Flashcards
+- Mock Tests
+- Analytics
+
+---
+
+# 📚 Learning Outcomes
 
 This project provided practical experience with:
 
-React.js development
-REST API integration
-Spring Boot
-Spring Security
-JWT authentication
-PostgreSQL
-JPA/Hibernate
-Axios
-Git & GitHub
-AWS EC2
-AWS RDS
-Linux server administration
-Nginx
-HTTPS/SSL
-Certbot
-Production deployment
-Environment-based configuration
-Application security
-Database persistence
-Full-stack integration
-👨‍💻 Author
-GATE QUEST PRO
+- React.js development
+- REST API integration
+- Spring Boot
+- Spring Security
+- JWT authentication
+- PostgreSQL
+- JPA/Hibernate
+- Axios
+- Git & GitHub
+- AWS EC2
+- AWS RDS
+- Linux server administration
+- Nginx
+- HTTPS/SSL
+- Certbot
+- Production deployment
+- Environment-based configuration
+- Application security
+- Database persistence
+- Full-stack integration
 
-GATE Preparation & Study Tracking Platform
+---
+
+# 👨‍💻 Author
+
+## GATE QUEST PRO
+
+**GATE Preparation & Study Tracking Platform**
 
 Developed as a final-year engineering project.
 
-📄 License
+---
+
+# 📄 License
 
 This project was developed for educational and academic purposes.
-
-
-### Important before you publish it
-
-Replace this placeholder:
-
-
-github:https://github.com/AdityaKadage96/gate-quest-pro/
